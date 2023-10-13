@@ -9,6 +9,7 @@ from .serializers import MenuItemSerializer, BookingSerializer, UserSerializer
 from rest_framework import viewsets, permissions
 from django.contrib.auth.models import User
 
+from rest_framework.permissions import IsAuthenticated
 def sayHello(request):
  return HttpResponse('Hello World')
 
@@ -37,7 +38,8 @@ class bookingView(APIView):
         serializer = BookingSerializer(items, many = True)
         return Response(serializer.data)
 
-class MenuItemView(generics.ListCreateAPIView):
+class MenuItemsView(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = Menu.objects.all()
     serializer_class = MenuItemSerializer
     
@@ -45,8 +47,10 @@ class SingleMenuItemView(generics.RetrieveUpdateAPIView, generics.DestroyAPIView
     queryset = Menu.objects.all()
     serializer_class = MenuItemSerializer   
    ### Holi Luis, cuando estes en francia me envias una postal. 
+   ### Vaaa.
    
 class BookingViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
     
