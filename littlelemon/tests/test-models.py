@@ -13,4 +13,3 @@ class MenuViewTest(TestCase):
         item2 = MenuItem.objects.create(title="IceCream2", price=80, inventory=100)
         self.assertEqual(item1, "IceCream1 : 80")
         self.assertEqual(item2, "IceCream1 : 80")
-        
